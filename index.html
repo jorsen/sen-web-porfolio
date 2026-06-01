@@ -86,12 +86,14 @@
 
         /* ABOUT */
         #about{background:var(--bg2);}
+        #about .s-label{margin-bottom:20px;}
         .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:center;}
+        .about-txt .s-title{margin-bottom:24px;}
         .av-frame{width:100%;aspect-ratio:1;border-radius:24px;background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(121,40,202,.1));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
         .av-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:24px;}
         .av-init{font-size:5rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .av-badge{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--grad);border-radius:12px;padding:10px 20px;font-size:.82rem;font-weight:700;color:#fff;box-shadow:0 8px 30px rgba(0,212,255,.35);letter-spacing:.3px;}
-        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px;}
         .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 8px;text-align:center;transition:border-color .3s;}
         .stat:hover{border-color:rgba(0,212,255,.3);}
         .stat-n{font-size:1.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -120,7 +122,18 @@
         .sk-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
         .sk-fill{height:100%;border-radius:4px;background:var(--grad);width:0;transition:width 1.2s cubic-bezier(.25,1,.5,1);}
         .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
-        .tag{padding:5px 12px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);border-radius:100px;font-size:.75rem;color:var(--txt2);font-family:'JetBrains Mono',monospace;}
+        .tag{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);border-radius:100px;font-size:.78rem;color:var(--txt2);font-family:'JetBrains Mono',monospace;cursor:default;transition:all .25s;}
+        .tag:hover{transform:translateY(-2px);color:var(--txt);}
+        .tag-icon{font-size:.85rem;line-height:1;}
+        .tag-cyan:hover{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.4);box-shadow:0 0 16px rgba(0,212,255,.15);}
+        .tag-purple:hover{background:rgba(121,40,202,.15);border-color:rgba(121,40,202,.45);box-shadow:0 0 16px rgba(121,40,202,.2);}
+        .tag-green:hover{background:rgba(0,212,150,.12);border-color:rgba(0,212,150,.4);box-shadow:0 0 16px rgba(0,212,150,.18);}
+        .tag-orange:hover{background:rgba(255,165,0,.1);border-color:rgba(255,165,0,.4);box-shadow:0 0 16px rgba(255,165,0,.15);}
+        .tag-pink:hover{background:rgba(255,80,160,.1);border-color:rgba(255,80,160,.4);box-shadow:0 0 16px rgba(255,80,160,.15);}
+        .tool-cats{display:flex;flex-direction:column;gap:20px;}
+        .tool-cat{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+        .tool-cat-lbl{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;min-width:130px;flex-shrink:0;}
+        .tool-cat .tags{margin-top:0;}
 
         /* EXPERIENCE */
         #experience{background:var(--bg2);}
@@ -312,6 +325,29 @@
             .s-title{font-size:1.8rem;}
             .hero-name{font-size:2.8rem;}
         }
+
+
+        /* ─── AI TOUCH ─── */
+        @keyframes aiGlitch{
+            0%,88%,100%{filter:none;transform:none;}
+            89%{filter:brightness(1.5) hue-rotate(25deg) saturate(2);transform:translate(-3px,0) skewX(-1.5deg);}
+            90%{filter:brightness(.65) hue-rotate(-30deg);transform:translate(4px,0) skewX(1deg);}
+            91%{filter:none;transform:none;}
+            92%{filter:brightness(1.3) saturate(1.8);transform:translate(-2px,0);}
+            93%{filter:none;transform:none;}
+        }
+        .hero-name{animation:aiGlitch 7s ease-in-out infinite;}
+
+        .ai-scan-wrap{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden;}
+        .ai-scan-wrap::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(0,212,255,.6) 50%,transparent 100%);animation:scanMove 8s linear infinite;}
+        @keyframes scanMove{0%{top:-2px;opacity:0;}3%{opacity:.7;}94%{opacity:.3;}100%{top:100%;opacity:0;}}
+
+        .ai-corner{position:absolute;top:24px;right:32px;display:flex;align-items:center;gap:8px;padding:7px 16px;background:rgba(5,8,22,.75);border:1px solid rgba(121,40,202,.4);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#b06dff;letter-spacing:2px;z-index:10;backdrop-filter:blur(10px);}
+        .ai-corner-dot{width:6px;height:6px;border-radius:50%;background:#b06dff;flex-shrink:0;animation:aiCornerPulse 1.8s ease-in-out infinite;}
+        @keyframes aiCornerPulse{0%,100%{box-shadow:0 0 0 0 rgba(176,109,255,.7);}50%{box-shadow:0 0 0 8px rgba(176,109,255,0);}}
+
+        .trail-dot{position:fixed;border-radius:50%;pointer-events:none;z-index:9990;transform:translate(-50%,-50%);}
+        @media(max-width:768px){.ai-corner{display:none;}}
     </style>
 </head>
 <body>
@@ -387,7 +423,7 @@
         <div class="s-label">01 — WHO I AM</div>
         <div class="about-grid reveal">
             <div>
-                <div style="position:relative;padding-bottom:28px;">
+                <div style="position:relative;padding-bottom:44px;">
                     <div class="av-frame">
                         <img src="photo.jpg" alt="Jorsen Mejia" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                         <span class="av-init" style="display:none;">JM</span>
@@ -427,6 +463,7 @@
                 <div class="sk-item"><div class="sk-row"><span class="sk-name">HTML5 / CSS3</span><span class="sk-pct">95%</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
                 <div class="sk-item"><div class="sk-row"><span class="sk-name">JavaScript</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
                 <div class="sk-item"><div class="sk-row"><span class="sk-name">React.js</span><span class="sk-pct">80%</span></div><div class="sk-bar"><div class="sk-fill" data-w="80"></div></div></div>
+                <div class="sk-item"><div class="sk-row"><span class="sk-name">Figma</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
                 <div class="sk-item"><div class="sk-row"><span class="sk-name">UI/UX Responsive Design</span><span class="sk-pct">90%</span></div><div class="sk-bar"><div class="sk-fill" data-w="90"></div></div></div>
             </div>
 
@@ -448,12 +485,64 @@
 
             <div class="sk-card full reveal">
                 <div class="sk-head"><div class="sk-ico">💳</div><div class="sk-ttl">Integrations &amp; Tools</div></div>
-                <div class="tags">
-                    <span class="tag">Laravel</span><span class="tag">Webflow</span><span class="tag">PayPal</span>
-                    <span class="tag">Stripe</span><span class="tag">Payment Gateways</span><span class="tag">PSD to HTML</span>
-                    <span class="tag">Speed Optimization</span><span class="tag">QA Testing</span><span class="tag">SEO</span>
-                    <span class="tag">Business Email</span><span class="tag">Custom Post Types</span><span class="tag">Shortcodes</span>
-                    <span class="tag">Custom CMS</span><span class="tag">cPanel</span><span class="tag">Git</span>
+                <div class="tool-cats">
+
+                    <div class="tool-cat">
+                        <span class="tool-cat-lbl">Frameworks</span>
+                        <div class="tags">
+                            <span class="tag tag-purple"><span class="tag-icon">⚡</span>Laravel</span>
+                            <span class="tag tag-purple"><span class="tag-icon">🌊</span>Webflow</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-cat">
+                        <span class="tool-cat-lbl">Payments</span>
+                        <div class="tags">
+                            <span class="tag tag-green"><span class="tag-icon">🅿</span>PayPal</span>
+                            <span class="tag tag-green"><span class="tag-icon">💳</span>Stripe</span>
+                            <span class="tag tag-green"><span class="tag-icon">🔗</span>Payment Gateways</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-cat">
+                        <span class="tool-cat-lbl">Dev Tools</span>
+                        <div class="tags">
+                            <span class="tag tag-cyan"><span class="tag-icon">🖼️</span>PSD to HTML</span>
+                            <span class="tag tag-cyan"><span class="tag-icon">⚡</span>Speed Optimization</span>
+                            <span class="tag tag-cyan"><span class="tag-icon">🔍</span>QA Testing</span>
+                            <span class="tag tag-cyan"><span class="tag-icon">📈</span>SEO</span>
+                            <span class="tag tag-cyan"><span class="tag-icon">🔀</span>Git</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-cat">
+                        <span class="tool-cat-lbl">CMS &amp; Architecture</span>
+                        <div class="tags">
+                            <span class="tag tag-orange"><span class="tag-icon">📝</span>Custom Post Types</span>
+                            <span class="tag tag-orange"><span class="tag-icon">⚙️</span>Shortcodes</span>
+                            <span class="tag tag-orange"><span class="tag-icon">🗂️</span>Custom CMS</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-cat">
+                        <span class="tool-cat-lbl">Infrastructure</span>
+                        <div class="tags">
+                            <span class="tag tag-pink"><span class="tag-icon">✉️</span>Business Email</span>
+                            <span class="tag tag-pink"><span class="tag-icon">🖥️</span>cPanel</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-cat">
+                        <span class="tool-cat-lbl">Design &amp; AI</span>
+                        <div class="tags">
+                            <span class="tag tag-purple"><span class="tag-icon">🎨</span>Figma</span>
+                            <span class="tag tag-purple"><span class="tag-icon">🤖</span>ChatGPT</span>
+                            <span class="tag tag-purple"><span class="tag-icon">✦</span>Claude AI</span>
+                            <span class="tag tag-purple"><span class="tag-icon">⌥</span>GitHub Copilot</span>
+                            <span class="tag tag-purple"><span class="tag-icon">🖼️</span>AI Image Gen</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -687,6 +776,7 @@
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
+
 // LOADER
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('gone'), 1800));
 
@@ -721,7 +811,7 @@ function lines(){
 (function anim(){ cx.clearRect(0,0,cv.width,cv.height); pts.forEach(p=>{p.u();p.d();}); lines(); requestAnimationFrame(anim); })();
 
 // TYPEWRITER
-const phrases=['Website Developer','WordPress Expert','React.js Developer','CMS Specialist','Payment Integration Pro','UI/UX Enthusiast'];
+const phrases=['Website Developer','WordPress Expert','React.js Developer','CMS Specialist','UI/UX Enthusiast'];
 let pi=0,ci=0,del=false;
 const tw=document.getElementById('tw');
 function type(){
@@ -832,6 +922,126 @@ document.getElementById('cForm').addEventListener('submit', async e => {
         btn.textContent = 'Send Message →';
     }
 });
+
+// ─── AI TOUCH ───
+// 1. Scan line overlay on hero
+(()=>{
+    const w = document.createElement('div');
+    w.className = 'ai-scan-wrap';
+    document.getElementById('hero').appendChild(w);
+})();
+
+// 2. "AI ENHANCED" corner badge
+(()=>{
+    const b = document.createElement('div');
+    b.className = 'ai-corner';
+    b.innerHTML = '<div class="ai-corner-dot"></div>AI ENHANCED';
+    document.getElementById('hero').appendChild(b);
+})();
+
+// 3. Text scramble on section labels when scrolled into view
+(()=>{
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+    function scramble(el){
+        const final = el.textContent;
+        let f=0, total=22;
+        (function run(){
+            el.textContent = final.split('').map((c,i)=>{
+                if(c===' '||c==='—'||c==='.') return c;
+                return f/total >= i/final.length ? c : CHARS[Math.floor(Math.random()*CHARS.length)];
+            }).join('');
+            if(++f<=total) requestAnimationFrame(run); else el.textContent=final;
+        })();
+    }
+    document.querySelectorAll('.s-label').forEach(el=>{
+        const obs=new IntersectionObserver(([e])=>{
+            if(e.isIntersecting){ scramble(el); obs.unobserve(el); }
+        },{threshold:1});
+        obs.observe(el);
+    });
+})();
+
+// 4. Neural cursor trail
+(()=>{
+    if(window.innerWidth<=768) return;
+    const COUNT=12;
+    const dots=Array.from({length:COUNT},(_,i)=>{
+        const d=document.createElement('div');
+        const sz=Math.max(1.5, 5-i*0.3);
+        d.className='trail-dot';
+        d.style.width=d.style.height=sz+'px';
+        document.body.appendChild(d);
+        return {el:d, x:0, y:0};
+    });
+    (function loop(){
+        dots[0].x=mx; dots[0].y=my;
+        dots.forEach((dot,i)=>{
+            if(i>0){ dot.x+=(dots[i-1].x-dot.x)*.38; dot.y+=(dots[i-1].y-dot.y)*.38; }
+            dot.el.style.left=dot.x+'px';
+            dot.el.style.top=dot.y+'px';
+            dot.el.style.opacity=(1-i/COUNT)*0.5;
+            dot.el.style.background=i<6?'#00d4ff':'#7928ca';
+        });
+        requestAnimationFrame(loop);
+    })();
+})();
+
+// 4D EFFECT — hero parallax layers + card tilt
+(function(){
+    // --- HERO MOUSE PARALLAX ---
+    const heroEl = document.getElementById('hero');
+    const parallaxLayers = [
+        { el: document.querySelector('.hero-tag'),  depth: 18 },
+        { el: document.querySelector('.hero-name'), depth: 28 },
+        { el: document.querySelector('.hero-tw'),   depth: 22 },
+        { el: document.querySelector('.hero-desc'), depth: 12 },
+        { el: document.querySelector('.hero-btns'), depth:  8 },
+        { el: document.querySelector('.scroll-ind'),depth:  5 },
+    ];
+    let phx=0,phy=0,ptx=0,pty=0,heroActive=false;
+    heroEl.addEventListener('mousemove', e=>{
+        heroActive=true;
+        ptx = (e.clientX - window.innerWidth  / 2);
+        pty = (e.clientY - window.innerHeight / 2);
+    });
+    heroEl.addEventListener('mouseleave', ()=>{ heroActive=false; });
+    (function heroLoop(){
+        const ease = 0.07;
+        phx += (ptx - phx) * ease;
+        phy += (pty - phy) * ease;
+        if (!heroActive){ ptx *= 0.92; pty *= 0.92; }
+        parallaxLayers.forEach(({el, depth})=>{
+            if (el) el.style.transform = `translate(${phx/depth}px,${phy/depth}px)`;
+        });
+        requestAnimationFrame(heroLoop);
+    })();
+
+    // --- 3D CARD TILT + GLINT ---
+    const tiltCards = document.querySelectorAll('.sk-card,.tl-card,.tl-role-card,.edu-card,.award-card,.c-form');
+    tiltCards.forEach(card=>{
+        let glint = document.createElement('div');
+        glint.style.cssText='position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(circle at 50% 50%,rgba(0,212,255,.12),transparent 65%);';
+        if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
+        card.appendChild(glint);
+
+        card.addEventListener('mousemove', e=>{
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width;
+            const y = (e.clientY - r.top)  / r.height;
+            const rx = (y - 0.5) * -14;
+            const ry = (x - 0.5) *  14;
+            card.style.transition = 'box-shadow .3s,border-color .3s';
+            card.style.transform  = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px)`;
+            glint.style.opacity = '1';
+            glint.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%,rgba(0,212,255,.13),transparent 65%)`;
+        });
+        card.addEventListener('mouseleave', ()=>{
+            card.style.transition = 'transform .6s cubic-bezier(.23,1,.32,1),box-shadow .3s,border-color .3s';
+            card.style.transform  = '';
+            glint.style.opacity   = '0';
+        });
+    });
+})();
 </script>
 </body>
 </html>
