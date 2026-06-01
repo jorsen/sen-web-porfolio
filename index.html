@@ -819,13 +819,7 @@ document.getElementById('cForm').addEventListener('submit', async e => {
         });
         const data = await res.json();
         if (data.success) {
-            status.style.display = 'block';
-            status.style.background = 'rgba(0,200,130,.12)';
-            status.style.border = '1px solid rgba(0,200,130,.3)';
-            status.style.color = '#00c896';
-            status.textContent = '✓ Message sent! I\'ll get back to you soon.';
-            form.reset();
-            form.querySelectorAll('.fg').forEach(f => f.classList.remove('invalid'));
+            window.location.href = 'thank-you.html';
         } else { throw new Error(); }
     } catch {
         status.style.display = 'block';

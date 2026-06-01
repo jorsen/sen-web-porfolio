@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Sent — Jorsen Mejia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050816'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300d4ff'/%3E%3Cstop offset='100%25' stop-color='%237928ca'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='28' fill='url(%23g)'%3EJM%3C/text%3E%3C/svg%3E">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        :root{
+            --bg:#050816;--bg2:#0d1117;--card:rgba(255,255,255,0.03);
+            --cyan:#00d4ff;--purple:#7928ca;
+            --grad:linear-gradient(135deg,#00d4ff,#7928ca);
+            --txt:#fff;--txt2:#8892b0;--txt3:#4a5568;
+            --border:rgba(255,255,255,0.08);
+        }
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;cursor:none;}
+
+        /* CURSOR */
+        .cur{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;mix-blend-mode:difference;}
+        .cur-f{position:fixed;width:32px;height:32px;border:1px solid rgba(0,212,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s;}
+
+        /* GRID BG */
+        .grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+
+        /* NAV */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;background:rgba(5,8,22,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+        .nav-c{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;}
+        .nav-logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;}
+
+        /* MAIN */
+        main{flex:1;display:flex;align-items:center;justify-content:center;padding:120px 40px 80px;position:relative;z-index:1;}
+        .ty-card{max-width:560px;width:100%;text-align:center;}
+
+        /* ICON */
+        .ty-icon-wrap{width:96px;height:96px;border-radius:50%;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 32px;position:relative;}
+        .ty-icon-wrap::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(0,212,255,.08);animation:ringPulse 2.5s ease-in-out infinite;}
+        .ty-icon-wrap::after{content:'';position:absolute;inset:-18px;border-radius:50%;border:1px solid rgba(0,212,255,.04);animation:ringPulse 2.5s ease-in-out infinite .4s;}
+        @keyframes ringPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.05)}}
+        .ty-check{width:44px;height:44px;stroke:var(--cyan);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+        .check-circle{stroke-dasharray:56;stroke-dashoffset:56;animation:drawCircle .6s ease forwards .2s;}
+        .check-mark{stroke-dasharray:20;stroke-dashoffset:20;animation:drawCheck .4s ease forwards .8s;}
+        @keyframes drawCircle{to{stroke-dashoffset:0}}
+        @keyframes drawCheck{to{stroke-dashoffset:0}}
+
+        .ty-label{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeUp .5s ease forwards .6s;}
+        .ty-title{font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px;opacity:0;animation:fadeUp .5s ease forwards .75s;}
+        .g{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .ty-desc{font-size:1rem;line-height:1.8;color:var(--txt2);margin-bottom:40px;opacity:0;animation:fadeUp .5s ease forwards .9s;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+        .ty-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .5s ease forwards 1.05s;}
+        .btn-p{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--grad);border-radius:8px;color:#fff;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .3s;box-shadow:0 4px 30px rgba(0,212,255,.2);}
+        .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,212,255,.3);}
+        .btn-s{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--txt);font-weight:600;font-size:.9rem;text-decoration:none;transition:all .3s;}
+        .btn-s:hover{border-color:rgba(0,212,255,.4);background:rgba(0,212,255,.05);transform:translateY(-2px);}
+
+        /* FOOTER */
+        footer{background:var(--bg2);border-top:1px solid var(--border);padding:24px 0;position:relative;z-index:1;}
+        .foot{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;}
+        .foot-copy{font-size:.82rem;color:var(--txt3);}
+        .foot-copy span{color:var(--cyan);}
+
+        @media(max-width:768px){
+            body{cursor:auto;}
+            .cur,.cur-f{display:none;}
+            .nav-c{padding:0 20px;}
+            main{padding:100px 20px 60px;}
+            .ty-actions{flex-direction:column;align-items:center;}
+            .btn-p,.btn-s{justify-content:center;width:100%;max-width:280px;}
+            .foot{flex-direction:column;gap:12px;text-align:center;padding:0 20px;}
+        }
+    </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="cur" id="cur"></div>
+<div class="cur-f" id="curf"></div>
+
+<nav>
+    <div class="nav-c">
+        <a href="index.html" class="nav-logo">&lt;JM /&gt;</a>
+    </div>
+</nav>
+
+<main>
+    <div class="ty-card">
+        <div class="ty-icon-wrap">
+            <svg class="ty-check" viewBox="0 0 44 44">
+                <circle class="check-circle" cx="22" cy="22" r="18"/>
+                <polyline class="check-mark" points="13,22 19,28 31,16"/>
+            </svg>
+        </div>
+        <div class="ty-label">Message Received</div>
+        <h1 class="ty-title">Thanks for <span class="g">reaching out!</span></h1>
+        <p class="ty-desc">Your message has been sent successfully. I'll review it and get back to you as soon as possible — usually within 24 hours.</p>
+        <div class="ty-actions">
+            <a href="index.html" class="btn-p">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                Back to Portfolio
+            </a>
+            <a href="mailto:jorsenmejia@gmail.com" class="btn-s">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Send Another Email
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="foot">
+        <div class="foot-copy">© <span id="yr"></span> <span>Jorsen Mejia</span>. Crafted with passion.</div>
+    </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const cur = document.getElementById('cur'), curf = document.getElementById('curf');
+let mx=0,my=0,fx=0,fy=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function af(){ fx+=(mx-fx)*.12; fy+=(my-fy)*.12; curf.style.left=fx+'px'; curf.style.top=fy+'px'; requestAnimationFrame(af); })();
+document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => { cur.style.transform='translate(-50%,-50%) scale(2)'; curf.style.transform='translate(-50%,-50%) scale(1.5)'; curf.style.borderColor='rgba(0,212,255,.8)'; });
+    el.addEventListener('mouseleave', () => { cur.style.transform='translate(-50%,-50%) scale(1)'; curf.style.transform='translate(-50%,-50%) scale(1)'; curf.style.borderColor='rgba(0,212,255,.5)'; });
+});
+</script>
+</body>
+</html>
