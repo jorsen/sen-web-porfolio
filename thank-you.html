@@ -71,10 +71,13 @@
             .btn-p,.btn-s{justify-content:center;width:100%;max-width:280px;}
             .foot{flex-direction:column;gap:12px;text-align:center;padding:0 20px;}
         }
+        /* PAGE TRANSITION */
+        #pt{position:fixed;inset:0;background:#050816;z-index:999998;transition:opacity .4s ease;}
     </style>
 </head>
 <body>
 
+<div id="pt"></div>
 <div class="grid-bg"></div>
 <div class="cur" id="cur"></div>
 <div class="cur-f" id="curf"></div>
@@ -117,6 +120,25 @@
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+// PAGE TRANSITION
+const pt = document.getElementById('pt');
+pt.style.opacity = '1';
+requestAnimationFrame(()=> requestAnimationFrame(()=>{
+    pt.style.opacity = '0';
+    setTimeout(()=> pt.style.pointerEvents = 'none', 450);
+}));
+document.querySelectorAll('a[href]').forEach(a => {
+    const h = a.getAttribute('href');
+    if (h && !h.startsWith('#') && !h.startsWith('http') && !h.startsWith('mailto') && !h.startsWith('tel')) {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            pt.style.pointerEvents = 'all';
+            pt.style.opacity = '1';
+            setTimeout(()=> window.location.href = h, 420);
+        });
+    }
+});
 
 const cur = document.getElementById('cur'), curf = document.getElementById('curf');
 let mx=0,my=0,fx=0,fy=0;
