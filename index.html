@@ -940,7 +940,9 @@ document.getElementById('cForm').addEventListener('submit', async e => {
         });
         const data = await res.json();
         if (data.success) {
-            window.location.href = 'thank-you.html';
+            pt.style.pointerEvents = 'all';
+            pt.style.opacity = '1';
+            setTimeout(()=> window.location.href = 'thank-you.html', 420);
         } else { throw new Error(); }
     } catch {
         status.style.display = 'block';
