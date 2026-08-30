@@ -2,17 +2,26 @@
 
 import { useState } from "react";
 
-export default function PasswordField() {
+export default function PasswordField({
+  name = "password",
+  label = "Password",
+  autoComplete,
+}: {
+  name?: string;
+  label?: string;
+  autoComplete?: string;
+}) {
   const [visible, setVisible] = useState(false);
 
   return (
     <div className="admin-field">
-      <label>Password</label>
+      <label>{label}</label>
       <div style={{ position: "relative" }}>
         <input
           type={visible ? "text" : "password"}
-          name="password"
+          name={name}
           required
+          autoComplete={autoComplete}
           style={{ paddingRight: 60 }}
         />
         <button

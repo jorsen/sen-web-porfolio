@@ -15,6 +15,7 @@
     "@neondatabase/serverless": "^0.10",
     "@prisma/adapter-neon": "^6",
     "@prisma/client": "^6",
+    "@react-pdf/renderer": "^4.9.0",
     "bcryptjs": "^2",
     "next": "^15",
     "next-auth": "^5.0.0-beta.32",
