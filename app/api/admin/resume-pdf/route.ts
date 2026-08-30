@@ -3,11 +3,13 @@ import { getContent } from "@/lib/content/get";
 import { ResumeDocument } from "@/lib/pdf/ResumeDocument";
 import { renderToBuffer } from "@react-pdf/renderer";
 
-export async function GET() {
+export async function GET(request: Request) {
   const session = await auth();
   if (!session) {
     return new Response("Unauthorized", { status: 401 });
   }
+
+  const download = new URL(request.url).searchParams.get("download") === "1";
 
   const [hero, about, skills, experience, education, awards, contact] = await Promise.all([
     getContent("hero"),
@@ -26,7 +28,7 @@ export async function GET() {
   return new Response(new Uint8Array(buffer), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${hero.nameFirst}-${hero.nameLast}-Resume.pdf"`,
+      "Content-Disposition": `${download ? "attachment" : "inline"}; filename="${hero.nameFirst}-${hero.nameLast}-Resume.pdf"`,
     },
   });
 }

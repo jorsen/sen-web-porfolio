@@ -19,10 +19,10 @@ export default function AdminDashboard() {
 
         <h1 style={{ fontSize: "1.5rem", margin: "40px 0 24px" }}>Tools</h1>
         <div className="admin-section-list">
-          <a href="/api/admin/resume-pdf" className="admin-section-link">
-            <span>Download Resume (PDF)</span>
-            <span style={{ color: "var(--txt3)" }}>Generated from live content ↓</span>
-          </a>
+          <Link href="/admin/resume" className="admin-section-link">
+            <span>Resume (PDF)</span>
+            <span style={{ color: "var(--txt3)" }}>Preview & download →</span>
+          </Link>
           <Link href="/admin/account" className="admin-section-link">
             <span>Account settings</span>
             <span style={{ color: "var(--txt3)" }}>Change password →</span>
