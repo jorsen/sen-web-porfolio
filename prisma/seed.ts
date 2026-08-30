@@ -122,6 +122,7 @@ const skills: SkillsContent = {
           { icon: "🤖", text: "Discord.js", color: "cyan" },
           { icon: "⏱️", text: "Cron Jobs", color: "cyan" },
           { icon: "🔗", text: "Webhooks & Automation", color: "cyan" },
+          { icon: "📧", text: "GoHighLevel", color: "cyan" },
         ],
       },
       {
@@ -187,6 +188,7 @@ const experience: ExperienceContent = {
             "Develop custom post types, flexible content modules, and shortcode designs",
             "Utilize Elementor, Divi, and ACF to deliver feature-rich WordPress solutions",
             "Leverage AI tools (Claude, ChatGPT, Gemini) to accelerate development, debug issues, and improve code quality",
+            "Develop websites and build email templates and marketing automation workflows using GoHighLevel",
           ],
         },
       ],
