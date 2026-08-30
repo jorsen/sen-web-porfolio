@@ -590,14 +590,14 @@
                         <div class="tl-group-co">Linkage Web Development</div>
                         <div class="tl-group-meta">📍 Baguio, Philippines · Remote</div>
                     </div>
-                    <span class="tl-group-total">4 yrs 4 mos</span>
+                    <span class="tl-group-total" data-start="2022-03-01">4 yrs 4 mos</span>
                 </div>
                 <div class="tl-group-body">
 
                     <div class="tl-role-card active-role">
                         <div class="tl-role-top">
                             <div><span class="tl-role-title">Website Developer</span><span class="badge-ft">Full-time</span></div>
-                            <div class="tl-role-meta"><span class="tl-date">Oct 2023 — Present</span><span class="tl-dur">2 yrs 9 mos</span></div>
+                            <div class="tl-role-meta"><span class="tl-date">Oct 2023 — Present</span><span class="tl-dur" data-start="2023-10-01">2 yrs 9 mos</span></div>
                         </div>
                         <ul class="tl-list">
                             <li>Design custom layouts and build CMS-based websites tailored to client specifications</li>
@@ -873,11 +873,32 @@ function type(){
 }
 setTimeout(type,2000);
 
+// DYNAMIC "PRESENT" DURATIONS (recalculated from today's date)
+(function(){
+    function fmtDuration(start){
+        const now=new Date();
+        let months=(now.getFullYear()-start.getFullYear())*12+(now.getMonth()-start.getMonth());
+        if(now.getDate()<start.getDate()) months--;
+        if(months<0) months=0;
+        const yrs=Math.floor(months/12), mos=months%12;
+        let out='';
+        if(yrs>0) out+=yrs+' yr'+(yrs>1?'s':'');
+        if(mos>0) out+=(out?' ':'')+mos+' mo'+(mos>1?'s':'');
+        return out||'< 1 mo';
+    }
+    document.querySelectorAll('[data-start]').forEach(el=>{
+        el.textContent=fmtDuration(new Date(el.dataset.start));
+    });
+})();
+
 // NAV SCROLL
 const nav=document.getElementById('nav'), nls=document.querySelectorAll('.nav-links a'), secs=document.querySelectorAll('section[id]');
 window.addEventListener('scroll',()=>{
     nav.classList.toggle('scrolled',scrollY>60);
-    let cur=''; secs.forEach(s=>{ if(scrollY>=s.offsetTop-200) cur=s.id; });
+    const pos=scrollY+200;
+    let cur='';
+    secs.forEach(s=>{ if(pos>=s.offsetTop && pos<s.offsetTop+s.offsetHeight) cur=s.id; });
+    if(!cur){ secs.forEach(s=>{ if(pos>=s.offsetTop) cur=s.id; }); }
     nls.forEach(l=>{ l.classList.remove('active'); if(l.getAttribute('href')==='#'+cur) l.classList.add('active'); });
 });
 
