@@ -1,6 +1,7 @@
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
+import PasswordField from "@/components/admin/PasswordField";
 
 async function loginAction(formData: FormData) {
   "use server";
@@ -37,10 +38,7 @@ export default async function LoginPage({
             <label>Email</label>
             <input type="email" name="email" required autoFocus />
           </div>
-          <div className="admin-field">
-            <label>Password</label>
-            <input type="password" name="password" required />
-          </div>
+          <PasswordField />
           <button type="submit" className="admin-btn admin-btn-primary" style={{ width: "100%", marginTop: 8 }}>
             Log in
           </button>
