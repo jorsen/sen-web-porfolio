@@ -16,6 +16,16 @@ function stripLeadingEmoji(s: string): string {
   return s.replace(/^[^\x00-\x7F]+\s*/, "");
 }
 
+// Surfaces dev/automation tooling first on the resume, without touching the
+// site's own category order.
+function orderedToolCategories(skills: SkillsContent) {
+  const priority = ["Dev Tools", "CMS & Architecture"];
+  return [...skills.toolsCard.categories].sort(
+    (a, b) => (priority.includes(a.label) ? priority.indexOf(a.label) : 99) -
+      (priority.includes(b.label) ? priority.indexOf(b.label) : 99)
+  );
+}
+
 const NAVY = "#0d1117";
 const NAVY_DEEP = "#050816";
 const CYAN = "#00b8d9";
@@ -31,18 +41,18 @@ const styles = StyleSheet.create({
   sidebarBackdrop: { position: "absolute", top: 0, bottom: 0, left: 0, width: "34%", backgroundColor: NAVY },
 
   // SIDEBAR
-  sidebar: { width: "34%", color: "#fff", padding: 22, paddingTop: 26 },
+  sidebar: { width: "34%", color: "#fff", padding: 20, paddingTop: 20 },
   name: { fontSize: 19, fontWeight: 700, lineHeight: 1.15 },
   nameAccent: { color: CYAN },
-  tagline: { fontSize: 9.3, color: CYAN, marginTop: 5, marginBottom: 12, letterSpacing: 0.3 },
+  tagline: { fontSize: 9.3, color: CYAN, marginTop: 4, marginBottom: 9, letterSpacing: 0.3 },
   sideSectionTitle: {
     fontSize: 8.3,
     fontWeight: 700,
     color: CYAN,
     textTransform: "uppercase",
     letterSpacing: 1.5,
-    marginBottom: 6,
-    marginTop: 12,
+    marginBottom: 5,
+    marginTop: 9,
   },
   sideDivider: { height: 1, backgroundColor: "rgba(0,184,217,0.35)", marginTop: 3, marginBottom: 3 },
   contactItem: { marginBottom: 6 },
@@ -60,30 +70,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     marginBottom: 4,
   },
-  sideEduSchool: { fontSize: 9.3, fontWeight: 700, color: "#fff", marginBottom: 2 },
-  sideEduDegree: { fontSize: 8.1, color: MUTED, marginBottom: 2, lineHeight: 1.3 },
-  sideEduYears: { fontSize: 7.8, color: CYAN },
-  sideAwardTitle: { fontSize: 8.8, fontWeight: 700, color: "#fff", marginBottom: 2 },
-  sideAwardDesc: { fontSize: 7.6, color: MUTED, lineHeight: 1.35, marginBottom: 6 },
+  skillRow: { marginBottom: 5.5 },
+  skillTopRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 2 },
+  skillName: { fontSize: 8.3, color: "#e8ecf5" },
+  skillPct: { fontSize: 7.6, color: CYAN, fontWeight: 700 },
+  skillBarTrack: { height: 3, backgroundColor: "rgba(255,255,255,0.12)", borderRadius: 2 },
+  skillBarFill: { height: 3, backgroundColor: CYAN, borderRadius: 2 },
 
   // MAIN
-  main: { width: "66%", padding: 26, paddingTop: 26, color: INK },
+  main: { width: "66%", padding: 22, paddingTop: 20, color: INK },
   mainSectionTitle: {
     fontSize: 10.5,
     fontWeight: 700,
     color: NAVY_DEEP,
     textTransform: "uppercase",
     letterSpacing: 1,
-    marginBottom: 6,
-    marginTop: 12,
+    marginBottom: 5,
+    marginTop: 9,
     borderBottomWidth: 1.5,
     borderBottomColor: CYAN,
     paddingBottom: 3,
   },
   mainSectionTitleFirst: { marginTop: 0 },
-  paragraph: { marginBottom: 4, lineHeight: 1.45, color: INK_SOFT, fontSize: 9 },
+  paragraph: { marginBottom: 3, lineHeight: 1.4, color: INK_SOFT, fontSize: 8.8 },
 
-  roleBlock: { marginBottom: 8 },
+  roleBlock: { marginBottom: 6.5 },
   roleTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 2 },
   roleTitleWrap: { flex: 1, paddingRight: 8 },
   company: { fontSize: 10, fontWeight: 700, color: NAVY_DEEP },
@@ -102,6 +113,15 @@ const styles = StyleSheet.create({
   bullet: { flexDirection: "row", marginBottom: 1.5, marginTop: 2 },
   bulletDot: { width: 10, fontSize: 8.3, color: CYAN },
   bulletText: { flex: 1, fontSize: 8.3, lineHeight: 1.35, color: INK_SOFT },
+
+  eduRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 },
+  eduSchool: { fontSize: 9.8, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
+  eduDegree: { fontSize: 8.6, color: INK_SOFT },
+  eduYears: { fontSize: 7.8, color: MUTED },
+
+  awardRow: { marginBottom: 7 },
+  awardTitle: { fontSize: 9.3, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
+  awardDesc: { fontSize: 8.3, color: INK_SOFT, lineHeight: 1.4 },
 });
 
 export function ResumeDocument({
@@ -158,20 +178,24 @@ export function ResumeDocument({
 
           <Text style={styles.sideSectionTitle}>Skills</Text>
           <View style={styles.sideDivider} />
-          <View style={styles.pillWrap}>
-            {skills.cards
-              .flatMap((c) => c.items.map((i) => i.name))
-              .map((s, i) => (
-                <Text style={styles.pill} key={i}>
-                  {s}
-                </Text>
-              ))}
-          </View>
+          {skills.cards
+            .flatMap((c) => c.items)
+            .map((item, i) => (
+              <View style={styles.skillRow} key={i}>
+                <View style={styles.skillTopRow}>
+                  <Text style={styles.skillName}>{item.name}</Text>
+                  <Text style={styles.skillPct}>{item.pct}%</Text>
+                </View>
+                <View style={styles.skillBarTrack}>
+                  <View style={[styles.skillBarFill, { width: `${item.pct}%` }]} />
+                </View>
+              </View>
+            ))}
 
           <Text style={styles.sideSectionTitle}>Tools</Text>
           <View style={styles.sideDivider} />
           <View style={styles.pillWrap}>
-            {skills.toolsCard.categories
+            {orderedToolCategories(skills)
               .flatMap((c) => c.tags.map((t) => t.text))
               .map((s, i) => (
                 <Text style={styles.pill} key={i}>
@@ -179,25 +203,6 @@ export function ResumeDocument({
                 </Text>
               ))}
           </View>
-
-          <Text style={styles.sideSectionTitle}>Education</Text>
-          <View style={styles.sideDivider} />
-          <Text style={styles.sideEduSchool}>{education.school}</Text>
-          <Text style={styles.sideEduDegree}>{education.degree}</Text>
-          <Text style={styles.sideEduYears}>{education.years}</Text>
-
-          {awards.items.length > 0 && (
-            <>
-              <Text style={styles.sideSectionTitle}>Awards</Text>
-              <View style={styles.sideDivider} />
-              {awards.items.map((a, i) => (
-                <View key={i}>
-                  <Text style={styles.sideAwardTitle}>{a.title}</Text>
-                  <Text style={styles.sideAwardDesc}>{a.description}</Text>
-                </View>
-              ))}
-            </>
-          )}
         </View>
 
         {/* MAIN */}
@@ -233,6 +238,27 @@ export function ResumeDocument({
                 ))}
               </View>
             ))
+          )}
+
+          <Text style={styles.mainSectionTitle}>Education</Text>
+          <View style={styles.eduRow} wrap={false}>
+            <View>
+              <Text style={styles.eduSchool}>{education.school}</Text>
+              <Text style={styles.eduDegree}>{education.degree}</Text>
+            </View>
+            <Text style={styles.eduYears}>{education.years}</Text>
+          </View>
+
+          {awards.items.length > 0 && (
+            <>
+              <Text style={styles.mainSectionTitle}>Awards</Text>
+              {awards.items.map((a, i) => (
+                <View style={styles.awardRow} key={i} wrap={false}>
+                  <Text style={styles.awardTitle}>{a.title}</Text>
+                  <Text style={styles.awardDesc}>{a.description}</Text>
+                </View>
+              ))}
+            </>
           )}
         </View>
         </View>
