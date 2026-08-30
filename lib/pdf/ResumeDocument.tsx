@@ -274,7 +274,9 @@ export function ResumeDocument({
                 </View>
               </View>
 
-              {group.roles.map((role, ri) => {
+              {[...group.roles]
+                .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+                .map((role, ri) => {
                 const isCurrent = role.endDate === null;
                 const badgeColors = BADGE_COLORS[role.badge];
                 return (
