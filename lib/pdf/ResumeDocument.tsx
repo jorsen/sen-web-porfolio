@@ -88,9 +88,11 @@ const styles = StyleSheet.create({
   contactItem: { marginBottom: 5 },
   contactLabel: { fontSize: 7.3, color: MUTED, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 1 },
   contactValue: { fontSize: 8.7, color: "#e8ecf5" },
-  toolCategory: { marginBottom: 4.5 },
+  toolCategory: { marginBottom: 4 },
   toolCategoryLabel: { fontSize: 7.2, color: CYAN, textTransform: "uppercase", letterSpacing: 1, marginBottom: 2 },
-  toolCategoryText: { fontSize: 7.6, color: "#e8ecf5", lineHeight: 1.3 },
+  toolItem: { flexDirection: "row", marginBottom: 1 },
+  toolDot: { width: 7, fontSize: 6.8, color: CYAN },
+  toolText: { flex: 1, fontSize: 7.2, lineHeight: 1.2, color: "#e8ecf5" },
   skillRow: { marginBottom: 4 },
   skillTopRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 1.5 },
   skillName: { fontSize: 7.9, color: "#e8ecf5" },
@@ -240,7 +242,12 @@ export function ResumeDocument({
           {orderedToolCategories(skills).map((cat, i) => (
             <View style={styles.toolCategory} key={i}>
               <Text style={styles.toolCategoryLabel}>{cat.label}</Text>
-              <Text style={styles.toolCategoryText}>{cat.tags.map((t) => t.text).join("  ·  ")}</Text>
+              {cat.tags.map((tag, ti) => (
+                <View style={styles.toolItem} key={ti}>
+                  <Text style={styles.toolDot}>•</Text>
+                  <Text style={styles.toolText}>{tag.text}</Text>
+                </View>
+              ))}
             </View>
           ))}
         </View>
