@@ -122,7 +122,6 @@ const skills: SkillsContent = {
           { icon: "🤖", text: "Discord.js", color: "cyan" },
           { icon: "⏱️", text: "Cron Jobs", color: "cyan" },
           { icon: "🔗", text: "Webhooks & Automation", color: "cyan" },
-          { icon: "📧", text: "GoHighLevel", color: "cyan" },
         ],
       },
       {
