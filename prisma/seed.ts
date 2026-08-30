@@ -301,16 +301,16 @@ const projects: ProjectsContent = {
     {
       title: "Sovereign — Crusade Roster & Diamond Distribution",
       description:
-        "Guild management tool for a mobile RPG: crusade and attendance logging, automated reward-splitting between participants and gold bidders, member roster, and a raffle system with multi-language support (EN/中文/日本語/한국어/ไทย).",
-      techStack: ["JavaScript", "Next.js"],
+        "Guild management tool for a mobile RPG: crusade and attendance logging, automated reward-splitting between participants and gold bidders, member roster, and a raffle system with multi-language support (EN/中文/日本語/한국어/ไทย). Includes a Discord bot that automatically notifies the guild of crusade updates and results.",
+      techStack: ["JavaScript", "Next.js", "Discord.js"],
       link: "https://sovereign-nightcrows.vercel.app/",
       imageUrl: null,
     },
     {
       title: "Capital Records — Guild Management Dashboard",
       description:
-        "Member roster and growth-tracking dashboard for a mobile RPG guild, with dungeon loot distribution, boss timer scheduling, attendance logging, fee splitting, Discord sync, and Excel export.",
-      techStack: ["JavaScript", "Next.js"],
+        "Member roster and growth-tracking dashboard for a mobile RPG guild, with dungeon loot distribution, boss timer scheduling, attendance logging, fee splitting, and Excel export. A Discord bot syncs data and automatically notifies the guild of updates.",
+      techStack: ["JavaScript", "Next.js", "Discord.js"],
       link: "https://capital-records.vercel.app/",
       imageUrl: null,
     },
@@ -332,8 +332,9 @@ const projects: ProjectsContent = {
     },
     {
       title: "Project X — Stock & Sales Tracker",
-      description: "Internal inventory and sales tracking system with employee-based authentication.",
-      techStack: ["TypeScript", "Next.js"],
+      description:
+        "Internal inventory and sales tracking system with employee-based authentication. A Discord bot automatically notifies staff of stock and sales updates.",
+      techStack: ["TypeScript", "Next.js", "Discord.js"],
       link: "https://project-x-sales.vercel.app/",
       imageUrl: null,
     },
