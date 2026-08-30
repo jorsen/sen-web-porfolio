@@ -34,14 +34,13 @@ const INK = "#1a1a2e";
 const INK_SOFT = "#4a5568";
 
 const styles = StyleSheet.create({
-  page: { fontFamily: "Helvetica", fontSize: 9.5 },
-  row: { flexDirection: "row" },
-  // Decorative backdrop only — repeats per-page via `fixed` so it always covers
-  // exactly one page's height, independent of how much sidebar text actually flows.
-  sidebarBackdrop: { position: "absolute", top: 0, bottom: 0, left: 0, width: "34%", backgroundColor: NAVY },
+  page: { fontFamily: "Helvetica", fontSize: 9.5, flexDirection: "row" },
 
-  // SIDEBAR
-  sidebar: { width: "34%", color: "#fff", padding: 20, paddingTop: 20 },
+  // SIDEBAR — plain in-flow colored block (avoids position:absolute/fixed,
+  // which some PDF viewers render inconsistently). Content is verified to
+  // fit a single page, so the overflow case this used to guard against
+  // doesn't come up.
+  sidebar: { width: "34%", backgroundColor: NAVY, color: "#fff", padding: 20, paddingTop: 20 },
   name: { fontSize: 19, fontWeight: 700, lineHeight: 1.15 },
   nameAccent: { color: CYAN },
   tagline: { fontSize: 9.3, color: CYAN, marginTop: 4, marginBottom: 9, letterSpacing: 0.3 },
@@ -146,8 +145,6 @@ export function ResumeDocument({
   return (
     <Document title={`${hero.nameFirst} ${hero.nameLast} — Resume`}>
       <Page size="A4" style={styles.page}>
-        <View style={styles.sidebarBackdrop} fixed />
-        <View style={styles.row}>
         {/* SIDEBAR */}
         <View style={styles.sidebar}>
           <Text style={styles.name}>
@@ -260,7 +257,6 @@ export function ResumeDocument({
               ))}
             </>
           )}
-        </View>
         </View>
       </Page>
     </Document>
