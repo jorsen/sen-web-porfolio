@@ -8,7 +8,38 @@ import type {
   AwardsContent,
   ContactContent,
 } from "@/lib/content/schemas";
-import { roleDuration } from "@/lib/content/experience-helpers";
+import { roleDuration, groupTotalDuration } from "@/lib/content/experience-helpers";
+import type { ExperienceRole } from "@/lib/content/schemas";
+
+function formatMonthYear(iso: string): string {
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
+// "Mar 2022 -> Oct 2023 -> Present" — uses a plain ASCII arrow, not a
+// unicode "→", since that glyph isn't in Helvetica's WinAnsi encoding and
+// would render as a garbled character (same class of bug as the emoji fix).
+function dateProgression(roles: ExperienceRole[]): string {
+  const sorted = [...roles].sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+  const parts = [formatMonthYear(sorted[0].startDate)];
+  for (const r of sorted) {
+    parts.push(r.endDate ? formatMonthYear(r.endDate) : "Present");
+  }
+  return parts.join("  ->  ");
+}
+
+const BADGE_COLORS: Record<ExperienceRole["badge"], { bg: string; fg: string }> = {
+  "full-time": { bg: "rgba(0,212,150,0.12)", fg: "#00966b" },
+  contract: { bg: "rgba(0,180,255,0.12)", fg: "#0089c7" },
+  "part-time": { bg: "rgba(255,165,0,0.12)", fg: "#b5750a" },
+  internship: { bg: "rgba(121,40,202,0.12)", fg: "#7928ca" },
+};
+const BADGE_LABEL: Record<ExperienceRole["badge"], string> = {
+  "full-time": "Full-time",
+  contract: "Contract",
+  "part-time": "Part-time",
+  internship: "Internship",
+};
 
 // Standard PDF fonts (Helvetica) only support WinAnsi glyphs — strip any
 // leading emoji some CMS fields bake into the text itself.
@@ -89,10 +120,10 @@ const styles = StyleSheet.create({
     borderLeftColor: "rgba(0,184,217,0.35)",
     paddingLeft: 14,
     marginLeft: 4,
-    marginBottom: 2,
+    marginBottom: 0,
   },
-  roleBlock: { marginBottom: 4.5, position: "relative" },
-  roleDot: {
+  companyHeader: { position: "relative", marginBottom: 1 },
+  companyDot: {
     position: "absolute",
     top: 2,
     left: -18.5,
@@ -101,11 +132,18 @@ const styles = StyleSheet.create({
     borderRadius: 3.5,
     backgroundColor: CYAN,
   },
+  companyTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
+  company: { fontSize: 9.8, fontWeight: 700, color: NAVY_DEEP },
+  companyLocation: { fontSize: 7.8, color: MUTED, marginTop: 1 },
+  companyProgression: { fontSize: 7.6, color: "#00838f", fontWeight: 700, textAlign: "right" },
+  companyTotal: { fontSize: 7.3, color: MUTED, marginTop: 2, textAlign: "right" },
+
+  roleBlock: { marginBottom: 4, marginTop: 2.5 },
   roleTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 2 },
   roleTitleWrap: { flex: 1, paddingRight: 8 },
-  company: { fontSize: 9.3, fontWeight: 700, color: NAVY_DEEP },
-  roleTitle: { fontSize: 8.5, fontWeight: 700, color: INK, marginTop: 1 },
-  location: { fontSize: 7.8, color: MUTED, marginTop: 1 },
+  roleTitleRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  roleTitle: { fontSize: 8.5, fontWeight: 700, color: INK },
+  roleBadge: { fontSize: 6.8, fontWeight: 700, borderRadius: 20, paddingVertical: 1.5, paddingHorizontal: 6, textTransform: "uppercase", letterSpacing: 0.3 },
   dateBadge: {
     fontSize: 7.6,
     color: "#00838f",
@@ -115,12 +153,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7,
     textAlign: "right",
   },
+  dateBadgeCurrent: { color: "#00966b", backgroundColor: "rgba(0,212,150,0.14)", fontWeight: 700 },
   duration: { fontSize: 7.3, color: MUTED, marginTop: 2, textAlign: "right" },
   bullet: { flexDirection: "row", marginBottom: 1, marginTop: 1.5 },
   bulletDot: { width: 10, fontSize: 7.8, color: CYAN },
   bulletText: { flex: 1, fontSize: 7.8, lineHeight: 1.3, color: INK_SOFT },
 
-  eduRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 },
+  eduRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 },
   eduSchool: { fontSize: 9.3, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
   eduDegree: { fontSize: 8.1, color: INK_SOFT },
   eduYears: { fontSize: 7.5, color: MUTED },
@@ -219,28 +258,52 @@ export function ResumeDocument({
           <Text style={styles.mainSectionTitle}>Experience</Text>
           {experience.groups.map((group, gi) => (
             <View style={styles.timelineGroup} key={gi}>
-              {group.roles.map((role, ri) => (
-                <View style={styles.roleBlock} key={ri} wrap={false}>
-                  <View style={styles.roleDot} />
-                  <View style={styles.roleTop}>
-                    <View style={styles.roleTitleWrap}>
-                      <Text style={styles.company}>{group.company}</Text>
-                      <Text style={styles.roleTitle}>{role.title}</Text>
-                      <Text style={styles.location}>{stripLeadingEmoji(group.location)}</Text>
-                    </View>
-                    <View>
-                      <Text style={styles.dateBadge}>{role.dateLabel}</Text>
-                      <Text style={styles.duration}>{roleDuration(role)}</Text>
-                    </View>
+              <View style={styles.companyHeader}>
+                <View style={styles.companyDot} />
+                <View style={styles.companyTop}>
+                  <View style={styles.roleTitleWrap}>
+                    <Text style={styles.company}>{group.company}</Text>
+                    <Text style={styles.companyLocation}>{stripLeadingEmoji(group.location)}</Text>
                   </View>
-                  {role.bullets.map((b, bi) => (
-                    <View style={styles.bullet} key={bi}>
-                      <Text style={styles.bulletDot}>•</Text>
-                      <Text style={styles.bulletText}>{b}</Text>
-                    </View>
-                  ))}
+                  <View>
+                    <Text style={styles.companyProgression}>{dateProgression(group.roles)}</Text>
+                    {group.roles.length > 1 && (
+                      <Text style={styles.companyTotal}>{groupTotalDuration(group.roles)} total</Text>
+                    )}
+                  </View>
                 </View>
-              ))}
+              </View>
+
+              {group.roles.map((role, ri) => {
+                const isCurrent = role.endDate === null;
+                const badgeColors = BADGE_COLORS[role.badge];
+                return (
+                  <View style={styles.roleBlock} key={ri} wrap={false}>
+                    <View style={styles.roleTop}>
+                      <View style={styles.roleTitleWrap}>
+                        <View style={styles.roleTitleRow}>
+                          <Text style={styles.roleTitle}>{role.title}</Text>
+                          <Text style={[styles.roleBadge, { backgroundColor: badgeColors.bg, color: badgeColors.fg }]}>
+                            {BADGE_LABEL[role.badge]}
+                          </Text>
+                        </View>
+                      </View>
+                      <View>
+                        <Text style={[styles.dateBadge, isCurrent ? styles.dateBadgeCurrent : undefined]}>
+                          {role.dateLabel}
+                        </Text>
+                        <Text style={styles.duration}>{roleDuration(role)}</Text>
+                      </View>
+                    </View>
+                    {role.bullets.map((b, bi) => (
+                      <View style={styles.bullet} key={bi}>
+                        <Text style={styles.bulletDot}>•</Text>
+                        <Text style={styles.bulletText}>{b}</Text>
+                      </View>
+                    ))}
+                  </View>
+                );
+              })}
             </View>
           ))}
 
