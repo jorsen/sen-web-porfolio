@@ -19,6 +19,9 @@ export default function Nav() {
             <a href="#education">Education</a>
           </li>
           <li>
+            <a href="#projects">Projects</a>
+          </li>
+          <li>
             <a href="#contact" className="nav-cta">
               Hire Me
             </a>

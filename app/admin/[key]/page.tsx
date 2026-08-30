@@ -9,6 +9,7 @@ import ExperienceForm from "@/components/admin/forms/ExperienceForm";
 import EducationForm from "@/components/admin/forms/EducationForm";
 import AwardsForm from "@/components/admin/forms/AwardsForm";
 import RecommendationsForm from "@/components/admin/forms/RecommendationsForm";
+import ProjectsForm from "@/components/admin/forms/ProjectsForm";
 import ContactAdminForm from "@/components/admin/forms/ContactForm";
 
 export default async function EditSectionPage({ params }: { params: Promise<{ key: string }> }) {
@@ -31,6 +32,7 @@ export default async function EditSectionPage({ params }: { params: Promise<{ ke
         {key === "education" && <EducationForm contentKey={key} initial={data as never} />}
         {key === "awards" && <AwardsForm contentKey={key} initial={data as never} />}
         {key === "recommendations" && <RecommendationsForm contentKey={key} initial={data as never} />}
+        {key === "projects" && <ProjectsForm contentKey={key} initial={data as never} />}
         {key === "contact" && <ContactAdminForm contentKey={key} initial={data as never} />}
       </div>
     </div>

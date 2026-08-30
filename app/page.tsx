@@ -10,12 +10,13 @@ import Experience from "@/components/sections/Experience";
 import Education from "@/components/sections/Education";
 import Awards from "@/components/sections/Awards";
 import Recommendations from "@/components/sections/Recommendations";
+import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [hero, about, skills, experience, education, awards, recommendations, contact] = await Promise.all([
+  const [hero, about, skills, experience, education, awards, recommendations, projects, contact] = await Promise.all([
     getContent("hero"),
     getContent("about"),
     getContent("skills"),
@@ -23,6 +24,7 @@ export default async function HomePage() {
     getContent("education"),
     getContent("awards"),
     getContent("recommendations"),
+    getContent("projects"),
     getContent("contact"),
   ]);
 
@@ -45,6 +47,7 @@ export default async function HomePage() {
       <Education content={education} />
       <Awards content={awards} />
       <Recommendations content={recommendations} />
+      <Projects content={projects} />
       <Contact content={contact} />
 
       <Footer linkedinUrl={contact.linkedinUrl} email={contact.email} />

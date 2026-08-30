@@ -132,6 +132,20 @@ export const recommendationsSchema = z.object({
 });
 export type RecommendationsContent = z.infer<typeof recommendationsSchema>;
 
+export const projectsSchema = z.object({
+  sectionLabel: z.string(),
+  items: z.array(
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      techStack: z.array(z.string()).min(1),
+      link: z.string(),
+      imageUrl: z.string().nullable(),
+    })
+  ),
+});
+export type ProjectsContent = z.infer<typeof projectsSchema>;
+
 export const contactSchema = z.object({
   sectionLabel: z.string(),
   heading: z.string(),
@@ -151,6 +165,7 @@ export const contentSchemas = {
   education: educationSchema,
   awards: awardsSchema,
   recommendations: recommendationsSchema,
+  projects: projectsSchema,
   contact: contactSchema,
 } as const;
 
@@ -166,5 +181,6 @@ export const CONTENT_LABELS: Record<ContentKey, string> = {
   education: "Education",
   awards: "Awards & Honors",
   recommendations: "Recommendations",
+  projects: "Projects",
   contact: "Contact",
 };

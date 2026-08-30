@@ -12,6 +12,7 @@ import {
   type EducationContent,
   type AwardsContent,
   type RecommendationsContent,
+  type ProjectsContent,
   type ContactContent,
 } from "../lib/content/schemas";
 
@@ -294,8 +295,60 @@ const recommendations: RecommendationsContent = {
   ],
 };
 
+const projects: ProjectsContent = {
+  sectionLabel: "07 — SELECTED WORK",
+  items: [
+    {
+      title: "Sovereign — Crusade Roster & Diamond Distribution",
+      description:
+        "Guild management tool for a mobile RPG: crusade and attendance logging, automated reward-splitting between participants and gold bidders, member roster, and a raffle system with multi-language support (EN/中文/日本語/한국어/ไทย).",
+      techStack: ["JavaScript", "Next.js"],
+      link: "https://sovereign-nightcrows.vercel.app/",
+      imageUrl: null,
+    },
+    {
+      title: "Capital Records — Guild Management Dashboard",
+      description:
+        "Member roster and growth-tracking dashboard for a mobile RPG guild, with dungeon loot distribution, boss timer scheduling, attendance logging, fee splitting, Discord sync, and Excel export.",
+      techStack: ["JavaScript", "Next.js"],
+      link: "https://capital-records.vercel.app/",
+      imageUrl: null,
+    },
+    {
+      title: "OSCA Records — Senior Citizen Management System",
+      description:
+        "Registration and records-management portal for a Senior Citizens Affairs office, with authenticated profile management and document printing.",
+      techStack: ["TypeScript", "Next.js"],
+      link: "https://osca-records.vercel.app/",
+      imageUrl: null,
+    },
+    {
+      title: "Joy Sussane — Virtual Assistant Services",
+      description:
+        "Freelance virtual assistant business site with a services grid, pricing packages, booking/consultation scheduling, and a contact form.",
+      techStack: ["JavaScript", "Next.js"],
+      link: "https://joy-sussane-administrative-virtual.vercel.app/",
+      imageUrl: null,
+    },
+    {
+      title: "Project X — Stock & Sales Tracker",
+      description: "Internal inventory and sales tracking system with employee-based authentication.",
+      techStack: ["TypeScript", "Next.js"],
+      link: "https://project-x-sales.vercel.app/",
+      imageUrl: null,
+    },
+    {
+      title: "Feeds Ledger",
+      description: "Ledger and records-tracking application secured with user authentication.",
+      techStack: ["Next.js"],
+      link: "https://feeds-ledger.vercel.app/",
+      imageUrl: null,
+    },
+  ],
+};
+
 const contact: ContactContent = {
-  sectionLabel: "07 — LET'S WORK TOGETHER",
+  sectionLabel: "08 — LET'S WORK TOGETHER",
   heading: "Have a project in mind?",
   description:
     "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's build something amazing together.",
@@ -313,6 +366,7 @@ const blocks: Record<keyof typeof contentSchemas, unknown> = {
   education,
   awards,
   recommendations,
+  projects,
   contact,
 };
 
