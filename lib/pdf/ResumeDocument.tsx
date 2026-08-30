@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   // which some PDF viewers render inconsistently). Content is verified to
   // fit a single page, so the overflow case this used to guard against
   // doesn't come up.
-  sidebar: { width: "34%", backgroundColor: NAVY, color: "#fff", padding: 20, paddingTop: 20 },
+  sidebar: { width: "34%", backgroundColor: NAVY, color: "#fff", padding: 20, paddingTop: 15, paddingBottom: 15 },
   name: { fontSize: 19, fontWeight: 700, lineHeight: 1.15 },
   nameAccent: { color: CYAN },
   tagline: { fontSize: 9.3, color: CYAN, marginTop: 4, marginBottom: 9, letterSpacing: 0.3 },
@@ -50,45 +50,61 @@ const styles = StyleSheet.create({
     color: CYAN,
     textTransform: "uppercase",
     letterSpacing: 1.5,
-    marginBottom: 5,
-    marginTop: 9,
+    marginBottom: 4,
+    marginTop: 7,
   },
-  sideDivider: { height: 1, backgroundColor: "rgba(0,184,217,0.35)", marginTop: 3, marginBottom: 3 },
-  contactItem: { marginBottom: 6 },
+  sideDivider: { height: 1, backgroundColor: "rgba(0,184,217,0.35)", marginTop: 2.5, marginBottom: 2.5 },
+  contactItem: { marginBottom: 5 },
   contactLabel: { fontSize: 7.3, color: MUTED, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 1 },
   contactValue: { fontSize: 8.7, color: "#e8ecf5" },
-  toolCategory: { marginBottom: 6 },
+  toolCategory: { marginBottom: 4.5 },
   toolCategoryLabel: { fontSize: 7.2, color: CYAN, textTransform: "uppercase", letterSpacing: 1, marginBottom: 2 },
-  toolCategoryText: { fontSize: 8.1, color: "#e8ecf5", lineHeight: 1.35 },
-  skillRow: { marginBottom: 5.5 },
-  skillTopRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 2 },
-  skillName: { fontSize: 8.3, color: "#e8ecf5" },
+  toolCategoryText: { fontSize: 7.6, color: "#e8ecf5", lineHeight: 1.3 },
+  skillRow: { marginBottom: 4 },
+  skillTopRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 1.5 },
+  skillName: { fontSize: 7.9, color: "#e8ecf5" },
   skillPct: { fontSize: 7.6, color: CYAN, fontWeight: 700 },
   skillBarTrack: { height: 3, backgroundColor: "rgba(255,255,255,0.12)", borderRadius: 2 },
   skillBarFill: { height: 3, backgroundColor: CYAN, borderRadius: 2 },
 
   // MAIN
-  main: { width: "66%", padding: 22, paddingTop: 20, color: INK },
+  main: { width: "66%", padding: 22, paddingTop: 15, paddingBottom: 15, color: INK },
   mainSectionTitle: {
     fontSize: 10.5,
     fontWeight: 700,
     color: NAVY_DEEP,
     textTransform: "uppercase",
     letterSpacing: 1,
-    marginBottom: 5,
-    marginTop: 9,
+    marginBottom: 4,
+    marginTop: 6,
     borderBottomWidth: 1.5,
     borderBottomColor: CYAN,
     paddingBottom: 3,
   },
   mainSectionTitleFirst: { marginTop: 0 },
-  paragraph: { marginBottom: 3, lineHeight: 1.4, color: INK_SOFT, fontSize: 8.8 },
+  paragraph: { marginBottom: 3, lineHeight: 1.3, color: INK_SOFT, fontSize: 8.2 },
 
-  roleBlock: { marginBottom: 6.5 },
+  timelineGroup: {
+    borderLeftWidth: 1.5,
+    borderLeftColor: "rgba(0,184,217,0.35)",
+    paddingLeft: 14,
+    marginLeft: 4,
+    marginBottom: 2,
+  },
+  roleBlock: { marginBottom: 4.5, position: "relative" },
+  roleDot: {
+    position: "absolute",
+    top: 2,
+    left: -18.5,
+    width: 7,
+    height: 7,
+    borderRadius: 3.5,
+    backgroundColor: CYAN,
+  },
   roleTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 2 },
   roleTitleWrap: { flex: 1, paddingRight: 8 },
-  company: { fontSize: 10, fontWeight: 700, color: NAVY_DEEP },
-  roleTitle: { fontSize: 9, fontWeight: 700, color: INK, marginTop: 1 },
+  company: { fontSize: 9.3, fontWeight: 700, color: NAVY_DEEP },
+  roleTitle: { fontSize: 8.5, fontWeight: 700, color: INK, marginTop: 1 },
   location: { fontSize: 7.8, color: MUTED, marginTop: 1 },
   dateBadge: {
     fontSize: 7.6,
@@ -100,18 +116,18 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   duration: { fontSize: 7.3, color: MUTED, marginTop: 2, textAlign: "right" },
-  bullet: { flexDirection: "row", marginBottom: 1.5, marginTop: 2 },
-  bulletDot: { width: 10, fontSize: 8.3, color: CYAN },
-  bulletText: { flex: 1, fontSize: 8.3, lineHeight: 1.35, color: INK_SOFT },
+  bullet: { flexDirection: "row", marginBottom: 1, marginTop: 1.5 },
+  bulletDot: { width: 10, fontSize: 7.8, color: CYAN },
+  bulletText: { flex: 1, fontSize: 7.8, lineHeight: 1.3, color: INK_SOFT },
 
-  eduRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 },
-  eduSchool: { fontSize: 9.8, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
-  eduDegree: { fontSize: 8.6, color: INK_SOFT },
-  eduYears: { fontSize: 7.8, color: MUTED },
+  eduRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 },
+  eduSchool: { fontSize: 9.3, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
+  eduDegree: { fontSize: 8.1, color: INK_SOFT },
+  eduYears: { fontSize: 7.5, color: MUTED },
 
-  awardRow: { marginBottom: 7 },
-  awardTitle: { fontSize: 9.3, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
-  awardDesc: { fontSize: 8.3, color: INK_SOFT, lineHeight: 1.4 },
+  awardRow: { marginBottom: 5 },
+  awardTitle: { fontSize: 8.8, fontWeight: 700, color: NAVY_DEEP, marginBottom: 1 },
+  awardDesc: { fontSize: 7.8, color: INK_SOFT, lineHeight: 1.3 },
 });
 
 export function ResumeDocument({
@@ -201,29 +217,32 @@ export function ResumeDocument({
           ))}
 
           <Text style={styles.mainSectionTitle}>Experience</Text>
-          {experience.groups.map((group) =>
-            group.roles.map((role, ri) => (
-              <View style={styles.roleBlock} key={`${group.company}-${ri}`} wrap={false}>
-                <View style={styles.roleTop}>
-                  <View style={styles.roleTitleWrap}>
-                    <Text style={styles.company}>{group.company}</Text>
-                    <Text style={styles.roleTitle}>{role.title}</Text>
-                    <Text style={styles.location}>{stripLeadingEmoji(group.location)}</Text>
+          {experience.groups.map((group, gi) => (
+            <View style={styles.timelineGroup} key={gi}>
+              {group.roles.map((role, ri) => (
+                <View style={styles.roleBlock} key={ri} wrap={false}>
+                  <View style={styles.roleDot} />
+                  <View style={styles.roleTop}>
+                    <View style={styles.roleTitleWrap}>
+                      <Text style={styles.company}>{group.company}</Text>
+                      <Text style={styles.roleTitle}>{role.title}</Text>
+                      <Text style={styles.location}>{stripLeadingEmoji(group.location)}</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.dateBadge}>{role.dateLabel}</Text>
+                      <Text style={styles.duration}>{roleDuration(role)}</Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={styles.dateBadge}>{role.dateLabel}</Text>
-                    <Text style={styles.duration}>{roleDuration(role)}</Text>
-                  </View>
+                  {role.bullets.map((b, bi) => (
+                    <View style={styles.bullet} key={bi}>
+                      <Text style={styles.bulletDot}>•</Text>
+                      <Text style={styles.bulletText}>{b}</Text>
+                    </View>
+                  ))}
                 </View>
-                {role.bullets.map((b, bi) => (
-                  <View style={styles.bullet} key={bi}>
-                    <Text style={styles.bulletDot}>•</Text>
-                    <Text style={styles.bulletText}>{b}</Text>
-                  </View>
-                ))}
-              </View>
-            ))
-          )}
+              ))}
+            </View>
+          ))}
 
           <Text style={styles.mainSectionTitle}>Education</Text>
           <View style={styles.eduRow} wrap={false}>
