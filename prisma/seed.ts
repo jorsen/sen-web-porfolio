@@ -172,6 +172,7 @@ const experience: ExperienceContent = {
           bullets: [
             "Built and maintained dynamic web solutions using WordPress, HTML, CSS, PHP, and JavaScript",
             "Collaborated with design and project teams to deliver high-quality web products on schedule",
+            "Develop websites and build email templates and marketing automation workflows using GoHighLevel",
           ],
         },
         {
@@ -187,7 +188,6 @@ const experience: ExperienceContent = {
             "Develop custom post types, flexible content modules, and shortcode designs",
             "Utilize Elementor, Divi, and ACF to deliver feature-rich WordPress solutions",
             "Leverage AI tools (Claude, ChatGPT, Gemini) to accelerate development, debug issues, and improve code quality",
-            "Develop websites and build email templates and marketing automation workflows using GoHighLevel",
           ],
         },
       ],
