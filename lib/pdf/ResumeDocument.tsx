@@ -57,18 +57,9 @@ const styles = StyleSheet.create({
   contactItem: { marginBottom: 6 },
   contactLabel: { fontSize: 7.3, color: MUTED, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 1 },
   contactValue: { fontSize: 8.7, color: "#e8ecf5" },
-  pillWrap: { flexDirection: "row", flexWrap: "wrap", gap: 4 },
-  pill: {
-    fontSize: 7.6,
-    color: "#e8ecf5",
-    backgroundColor: "rgba(255,255,255,0.08)",
-    borderWidth: 0.75,
-    borderColor: "rgba(0,184,217,0.4)",
-    borderRadius: 3,
-    paddingVertical: 2.5,
-    paddingHorizontal: 6,
-    marginBottom: 4,
-  },
+  toolCategory: { marginBottom: 6 },
+  toolCategoryLabel: { fontSize: 7.2, color: CYAN, textTransform: "uppercase", letterSpacing: 1, marginBottom: 2 },
+  toolCategoryText: { fontSize: 8.1, color: "#e8ecf5", lineHeight: 1.35 },
   skillRow: { marginBottom: 5.5 },
   skillTopRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 2 },
   skillName: { fontSize: 8.3, color: "#e8ecf5" },
@@ -191,15 +182,12 @@ export function ResumeDocument({
 
           <Text style={styles.sideSectionTitle}>Tools</Text>
           <View style={styles.sideDivider} />
-          <View style={styles.pillWrap}>
-            {orderedToolCategories(skills)
-              .flatMap((c) => c.tags.map((t) => t.text))
-              .map((s, i) => (
-                <Text style={styles.pill} key={i}>
-                  {s}
-                </Text>
-              ))}
-          </View>
+          {orderedToolCategories(skills).map((cat, i) => (
+            <View style={styles.toolCategory} key={i}>
+              <Text style={styles.toolCategoryLabel}>{cat.label}</Text>
+              <Text style={styles.toolCategoryText}>{cat.tags.map((t) => t.text).join("  ·  ")}</Text>
+            </View>
+          ))}
         </View>
 
         {/* MAIN */}
