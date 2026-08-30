@@ -101,6 +101,7 @@ const skills: SkillsContent = {
         tags: [
           { icon: "⚡", text: "Laravel", color: "purple" },
           { icon: "🌊", text: "Webflow", color: "purple" },
+          { icon: "🤖", text: "Discord.js", color: "purple" },
         ],
       },
       {
@@ -119,7 +120,6 @@ const skills: SkillsContent = {
           { icon: "🔍", text: "QA Testing", color: "cyan" },
           { icon: "📈", text: "SEO", color: "cyan" },
           { icon: "🔀", text: "Git", color: "cyan" },
-          { icon: "🤖", text: "Discord.js", color: "cyan" },
           { icon: "⏱️", text: "Cron Jobs", color: "cyan" },
           { icon: "🔗", text: "Webhooks & Automation", color: "cyan" },
         ],
