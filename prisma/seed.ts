@@ -48,6 +48,7 @@ const about: AboutContent = {
   paragraphs: [
     "A dedicated Website Developer at Linkage Web Development, I build dynamic web solutions that help businesses grow online. With expertise spanning WordPress, HTML, CSS, PHP, and JavaScript, I design custom layouts, build CMS sites, and integrate payment systems including PayPal and Stripe.",
     "I specialize in developing custom post types, flexible content architectures, and shortcode designs using tools like Elementor, Divi, and ACF. My goal is always to deliver innovative web systems tailored precisely to each client's needs.",
+    "I also leverage AI tools like Claude, ChatGPT, and Gemini to accelerate development and improve code quality, and build automation workflows using GoHighLevel and custom bots to streamline business processes.",
   ],
   infoRows: [
     { icon: "📍", text: "Calabarzon, Philippines" },
