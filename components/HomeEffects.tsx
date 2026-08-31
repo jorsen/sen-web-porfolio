@@ -125,10 +125,26 @@ export default function HomeEffects({ typewriterPhrases }: { typewriterPhrases: 
     }
     const twStart = window.setTimeout(type, 2000);
 
+    // HORIZONTAL SCROLL GROUPS — anchor links inside a pinned group all share the
+    // same offsetTop (they're panned horizontally, not stacked), so both scrollspy
+    // and click-to-scroll need to reason about scroll progress within the group.
+    function hscrollTarget(id: string) {
+      const el = document.getElementById(id);
+      const outer = el?.closest<HTMLElement>(".hscroll-outer");
+      if (!el || !outer) return null;
+      const panelIds = Array.from(outer.querySelectorAll("section[id]")).map((s) => s.id);
+      const idx = panelIds.indexOf(id);
+      if (idx === -1) return null;
+      const scrollable = outer.offsetHeight - window.innerHeight;
+      const progress = panelIds.length > 1 ? idx / (panelIds.length - 1) : 0;
+      return { outerTop: outer.offsetTop, scrollable, progress, panelIds, idx };
+    }
+
     // NAV SCROLL (scrollspy) — active section is the one actually containing the scroll position
     const nav = document.getElementById("nav");
     const nls = document.querySelectorAll(".nav-links a");
     const secs = document.querySelectorAll("section[id]");
+    const hOuters = document.querySelectorAll<HTMLElement>(".hscroll-outer");
     const onScroll = () => {
       nav?.classList.toggle("scrolled", scrollY > 60);
       const pos = scrollY + 200;
@@ -143,12 +159,39 @@ export default function HomeEffects({ typewriterPhrases }: { typewriterPhrases: 
           if (pos >= el.offsetTop) cur = el.id;
         });
       }
+      hOuters.forEach((outer) => {
+        const top = outer.offsetTop;
+        const bottom = top + outer.offsetHeight;
+        if (scrollY >= top && scrollY < bottom) {
+          const panelIds = Array.from(outer.querySelectorAll("section[id]")).map((s) => s.id);
+          const scrollable = outer.offsetHeight - window.innerHeight;
+          const progress = scrollable > 0 ? Math.min(1, Math.max(0, (scrollY - top) / scrollable)) : 0;
+          const idx = Math.round(progress * (panelIds.length - 1));
+          if (panelIds[idx]) cur = panelIds[idx];
+        }
+      });
       nls.forEach((l) => {
         l.classList.remove("active");
         if (l.getAttribute("href") === "#" + cur) l.classList.add("active");
       });
     };
     window.addEventListener("scroll", onScroll);
+
+    // ANCHOR CLICKS — override native jump for links targeting a panel inside a
+    // horizontal-scroll group, since the browser would otherwise land on whichever
+    // panel happens to be at the top of the pinned range instead of the one clicked.
+    const onAnchorClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement)?.closest<HTMLAnchorElement>('a[href^="#"]');
+      const href = a?.getAttribute("href");
+      if (!href || href.length < 2) return;
+      const id = href.slice(1);
+      const target = hscrollTarget(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.outerTop + target.progress * target.scrollable;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    };
+    document.addEventListener("click", onAnchorClick);
 
     // MOBILE NAV
     const ham = document.getElementById("ham");
@@ -382,6 +425,7 @@ export default function HomeEffects({ typewriterPhrases }: { typewriterPhrases: 
       clearTimeout(twTimer);
       window.removeEventListener("load", onLoad);
       window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("click", onAnchorClick);
       document.removeEventListener("keydown", onEsc);
       if (resizeHandler) window.removeEventListener("resize", resizeHandler);
       cancelAnimationFrame(animId);
