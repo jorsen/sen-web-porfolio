@@ -261,6 +261,9 @@
         .foot-social{display:flex;gap:16px;}
         .soc{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;text-decoration:none;color:var(--txt3);transition:all .3s;}
         .soc:hover{border-color:rgba(0,212,255,.4);color:var(--cyan);}
+        .foot-email{display:flex;align-items:center;height:36px;padding:0 16px;border-radius:8px;border:1px solid var(--border);font-size:.82rem;color:var(--txt2);text-decoration:none;transition:all .3s;}
+        .foot-email:hover{border-color:rgba(0,212,255,.4);color:var(--cyan);}
+        @media(max-width:480px){.foot-email{font-size:.72rem;padding:0 10px;}}
 
         /* HAMBURGER ANIMATED */
         .hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;padding:4px;z-index:1001;position:relative;}
@@ -298,8 +301,8 @@
         .mob-nav.open a:nth-child(8){opacity:1;transform:translateY(0);transition-delay:.52s;}
         .mob-nav.open a:nth-child(9){opacity:1;transform:translateY(0);transition-delay:.59s;}
         .mob-nav a:hover{color:var(--cyan);}
-        .mob-close{position:absolute;top:24px;right:32px;font-size:1.8rem;color:var(--txt2);cursor:pointer;background:none;border:none;line-height:1;transition:color .3s,transform .3s;}
-        .mob-close:hover{color:var(--cyan);transform:rotate(90deg);}
+        .mob-close{position:absolute;top:24px;right:24px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--txt);background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;cursor:pointer;line-height:1;transition:color .3s,transform .3s,border-color .3s,background .3s;}
+        .mob-close:hover{color:var(--cyan);border-color:rgba(0,212,255,.4);background:rgba(0,212,255,.08);transform:rotate(90deg);}
         .mob-nav-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--cyan),transparent);margin:4px 0;opacity:0;transition:opacity .4s .45s;}
         .mob-nav.open .mob-nav-line{opacity:.4;}
         .mob-nav-socials{display:flex;gap:20px;opacity:0;transform:translateY(12px);transition:opacity .4s .5s,transform .4s .5s;}

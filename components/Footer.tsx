@@ -6,11 +6,11 @@ export default function Footer({ linkedinUrl, email }: { linkedinUrl: string; em
           © <span>{new Date().getFullYear()}</span> <span>Jorsen Mejia</span>. Crafted with passion.
         </div>
         <div className="foot-social">
-          <a href={linkedinUrl} className="soc" target="_blank">
+          <a href={linkedinUrl} className="soc" target="_blank" title="LinkedIn" aria-label="LinkedIn">
             in
           </a>
-          <a href={`mailto:${email}`} className="soc">
-            @
+          <a href={`mailto:${email}`} className="foot-email" title="Email" aria-label="Email">
+            {email}
           </a>
         </div>
       </div>
