@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const DESKTOP_QUERY = "(min-width: 1025px)";
-
 export default function HorizontalScrollGroup({ children }: { children: React.ReactNode[] }) {
   const outerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -11,7 +9,6 @@ export default function HorizontalScrollGroup({ children }: { children: React.Re
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const mq = window.matchMedia(DESKTOP_QUERY);
     let ticking = false;
 
     const apply = () => {
@@ -19,11 +16,6 @@ export default function HorizontalScrollGroup({ children }: { children: React.Re
       const outer = outerRef.current;
       const track = trackRef.current;
       if (!outer || !track) return;
-
-      if (!mq.matches) {
-        track.style.transform = "";
-        return;
-      }
 
       const rect = outer.getBoundingClientRect();
       const scrollable = rect.height - window.innerHeight;
@@ -42,11 +34,9 @@ export default function HorizontalScrollGroup({ children }: { children: React.Re
     apply();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    mq.addEventListener("change", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      mq.removeEventListener("change", onScroll);
     };
   }, [panels]);
 

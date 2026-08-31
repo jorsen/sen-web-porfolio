@@ -16,6 +16,12 @@ export default function Nav() {
             <a href="#experience">Experience</a>
           </li>
           <li>
+            <a href="#awards">Awards</a>
+          </li>
+          <li>
+            <a href="#recommendations">Recommendations</a>
+          </li>
+          <li>
             <a href="#education">Education</a>
           </li>
           <li>
