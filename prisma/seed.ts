@@ -259,7 +259,7 @@ const experience: ExperienceContent = {
 };
 
 const education: EducationContent = {
-  sectionLabel: "04 — ACADEMIC BACKGROUND",
+  sectionLabel: "06 — ACADEMIC BACKGROUND",
   icon: "🎓",
   school: "STI College",
   degree: "Bachelor's Degree — Information Technology",
@@ -267,7 +267,7 @@ const education: EducationContent = {
 };
 
 const awards: AwardsContent = {
-  sectionLabel: "05 — RECOGNITION",
+  sectionLabel: "04 — RECOGNITION",
   items: [
     {
       icon: "🏆",
@@ -278,7 +278,7 @@ const awards: AwardsContent = {
 };
 
 const recommendations: RecommendationsContent = {
-  sectionLabel: "06 — WHAT OTHERS SAY",
+  sectionLabel: "05 — WHAT OTHERS SAY",
   items: [
     {
       quote: "Great mentor. The work he did marked with cross on the same task.",
