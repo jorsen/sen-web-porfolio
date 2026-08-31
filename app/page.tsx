@@ -102,13 +102,13 @@ export default async function HomePage() {
 
       <Hero content={hero} />
       <About content={about} />
+      <Skills content={skills} />
+      <Experience content={experience} />
       <HorizontalScrollGroup>
-        <Skills content={skills} />
-        <Experience content={experience} />
+        <Awards content={awards} />
+        <Recommendations content={recommendations} />
         <Education content={education} />
       </HorizontalScrollGroup>
-      <Awards content={awards} />
-      <Recommendations content={recommendations} />
       <Projects content={projects} />
       <Contact content={contact} />
 
