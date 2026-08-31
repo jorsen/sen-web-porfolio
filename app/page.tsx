@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import MobileNav from "@/components/MobileNav";
 import Footer from "@/components/Footer";
 import HomeEffects from "@/components/HomeEffects";
+import HorizontalScrollGroup from "@/components/HorizontalScrollGroup";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -101,9 +102,11 @@ export default async function HomePage() {
 
       <Hero content={hero} />
       <About content={about} />
-      <Skills content={skills} />
-      <Experience content={experience} />
-      <Education content={education} />
+      <HorizontalScrollGroup>
+        <Skills content={skills} />
+        <Experience content={experience} />
+        <Education content={education} />
+      </HorizontalScrollGroup>
       <Awards content={awards} />
       <Recommendations content={recommendations} />
       <Projects content={projects} />
