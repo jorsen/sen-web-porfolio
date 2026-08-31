@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { getContent } from "@/lib/content/get";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Message Sent",
+  robots: { index: false, follow: false },
+};
 
 export default async function ThankYouPage() {
   const contact = await getContent("contact");

@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import GlobalEffects from "@/components/GlobalEffects";
+import { SITE_URL } from "@/lib/site";
 
 const FAVICON =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050816'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300d4ff'/%3E%3Cstop offset='100%25' stop-color='%237928ca'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='28' fill='url(%23g)'%3EJM%3C/text%3E%3C/svg%3E";
 
 export const metadata: Metadata = {
-  title: "Jorsen Mejia — Website Developer",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Jorsen Mejia — Website Developer",
+    template: "%s — Jorsen Mejia",
+  },
+  description:
+    "Website Developer with 7+ years of experience crafting custom web solutions in WordPress, React.js, CMS development, and payment system integrations.",
   icons: { icon: FAVICON },
+  robots: { index: true, follow: true },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
